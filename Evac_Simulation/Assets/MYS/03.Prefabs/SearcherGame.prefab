@@ -292,7 +292,7 @@ Transform:
   m_GameObject: {fileID: 5828848096225825311}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 9197831425872204622}
   m_RootOrder: 4
@@ -385,7 +385,7 @@ Transform:
   m_GameObject: {fileID: 5828848096659002088}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 9197831425872204622}
   m_RootOrder: 3
@@ -478,7 +478,7 @@ Transform:
   m_GameObject: {fileID: 5828848096697355505}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 9197831425872204622}
   m_RootOrder: 2
@@ -571,7 +571,7 @@ Transform:
   m_GameObject: {fileID: 5828848097256432402}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 9197831425872204622}
   m_RootOrder: 6
@@ -664,7 +664,7 @@ Transform:
   m_GameObject: {fileID: 5828848097765228518}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 9197831425872204622}
   m_RootOrder: 5
@@ -740,12 +740,12 @@ GameObject:
   - component: {fileID: 5828848097887619964}
   - component: {fileID: 5828848097887619965}
   - component: {fileID: 5828848097887619962}
-  - component: {fileID: 5828848097887619963}
   - component: {fileID: 5828848097887619960}
   - component: {fileID: 5828848097887619961}
   - component: {fileID: 5828848097887619958}
   - component: {fileID: 5828848097887619959}
   - component: {fileID: 5828848097887619967}
+  - component: {fileID: 4510603375947834060}
   m_Layer: 0
   m_Name: Player
   m_TagString: Object
@@ -762,7 +762,7 @@ Transform:
   m_GameObject: {fileID: 5828848097887619956}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 9197831425872204622}
   m_RootOrder: 1
@@ -774,7 +774,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5828848097887619956}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &5828848097887619962
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -814,19 +814,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &5828848097887619963
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5828848097887619956}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5828848097887619960
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -871,6 +858,17 @@ MonoBehaviour:
   exits:
   - {fileID: 5828848096891432236}
   - {fileID: 5828848097522718732}
+  doors:
+  - {fileID: 1392955414474402069}
+  - {fileID: 4370131597454060199}
+  - {fileID: 5969698695713952012}
+  - {fileID: 1941731840760279599}
+  - {fileID: 7281049651615922697}
+  - {fileID: 2036499131005648706}
+  - {fileID: 7022353104699112955}
+  - {fileID: 2730372725285447368}
+  - {fileID: 8717591146484130089}
+  - {fileID: 4857828692133338290}
 --- !u!114 &5828848097887619958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -926,8 +924,9 @@ MonoBehaviour:
   - Wall
   - Exit
   - Fire
-  m_RaysPerDirection: 11
-  m_MaxRayDegrees: 90
+  - Door
+  m_RaysPerDirection: 20
+  m_MaxRayDegrees: 30
   m_SphereCastRadius: 0.2
   m_RayLength: 25
   m_RayLayerMask:
@@ -938,6 +937,20 @@ MonoBehaviour:
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
   m_StartVerticalOffset: 0
   m_EndVerticalOffset: 0
+--- !u!136 &4510603375947834060
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5828848097887619956}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5969698695713952012
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,8 +9,9 @@ using Unity.Barracuda;
 
 public class Searcher : Agent
 {
-    // 회전속도
+    // 회전속도, 각도
     public float rotSpeed = 5.0f;
+    float rotY;
     // 이동속도
     public float moveSpeed = 5.0f;
     // 회전 : 왼쪽, 오른쪽, 가만히
@@ -18,6 +19,7 @@ public class Searcher : Agent
     // 오브젝트
     public GameObject[] objects;
     public GameObject[] exits;
+    public List<GameObject> doors;
     //전 프레임 위치 좌표
     Vector3 previousPos;
     //가까운 출구
@@ -28,24 +30,22 @@ public class Searcher : Agent
     }
     public override void Initialize()
     {
-        ReSetPosition();
-
+        //ReSetPosition();
     }
+
     public override void OnActionReceived(float[] vectorAction)
     {
         // 만일 vectorAction의 0번 값이 0이면 왼쪽으로 회전하고, 1이면 회전하지 않고, 2면 오른쪽으로 회전하게 하고 싶다.
         float rotvalue = vectorAction[0] - 1;
-        transform.Rotate(transform.up, rotvalue * rotSpeed);
+        //print(rotvalue);
+        //transform.Rotate(transform.up, rotvalue * rotSpeed);
+        rotY += rotvalue * rotSpeed;
+
+        transform.localEulerAngles = new Vector3(0, rotY, 0);
         // 만일 vectorAction의 1번 값이 0이면 가만히 있고, 1이면 앞으로 움직인다.
-        Vector3 dir = new Vector3(0, 0, vectorAction[1]);
-        dir = transform.TransformDirection(dir);
+        Vector3 dir = transform.forward * vectorAction[1];
         transform.position += dir * moveSpeed * Time.deltaTime;
-        //MaxStep이 0 이상이라면 1 / maxStep만큼 점수를 감점
-        if (MaxStep > 0)
-        {
-            //시간에 따른 벌점 부여
-            AddReward(-1.0f / (float)MaxStep);
-        }
+
 
 
         //현재 거리와 출구 1의 거리
@@ -53,9 +53,18 @@ public class Searcher : Agent
         //예전 거리와 출구 1의 거리
         float preDis = Vector3.Distance(previousPos, target);
 
-        if (preDis < nowDis)
+        if (preDis <= nowDis)
         {
-            AddReward(-0.1f);
+            //MaxStep이 0 보다 크다면 1 / maxStep만큼 점수를 감점
+            if (MaxStep > 0)
+            {
+                //시간에 경과에 따른 벌점 부여
+                AddReward(-10.0f / (float)MaxStep);
+            }
+        }
+        else
+        {
+            //AddReward(0.1f);
         }
 
 
@@ -88,7 +97,6 @@ public class Searcher : Agent
     public override void OnEpisodeBegin()
     {
         ReSetPosition();
-
     }
 
 
@@ -98,6 +106,12 @@ public class Searcher : Agent
         {
             ReSetPosition();
         }
+        //Ray ray = new Ray(transform.position, transform.forward);
+        //RaycastHit hit = new RaycastHit();
+        //if (Physics.Raycast(ray, out hit))
+        //{
+        //    print(hit.transform.tag);
+        //}
     }
     public void ReSetPosition()
     {
@@ -127,14 +141,34 @@ public class Searcher : Agent
             }
         }
         //가까운 출구를 검색한다.
-
+        //print("0번과 거리 : "+Vector3.Distance(transform.position, exits[0].transform.position));
+        //print("1번과 거리 : " + Vector3.Distance(transform.position, exits[1].transform.position));
         if (Vector3.Distance(transform.position, exits[0].transform.position) > Vector3.Distance(transform.position, exits[1].transform.position))
         {
             target = exits[1].transform.position;
+            // print("1번 출구");
         }
         else
         {
             target = exits[0].transform.position;
+            //print("0번 출구");
+        }
+
+    }
+
+    // 문을 통과해서 나간다면
+    private void OnTriggerExit(Collider col)
+    {
+        switch (col.gameObject.tag)
+        {           
+            //문에 부딪히면 상점 부여
+            case "Door":
+                CheckDoor(col);
+                break;
+
+            // 부딪힌 오브젝트의 태그가 없다면
+            default:
+                break;
         }
     }
     private void OnCollisionEnter(Collision col)
@@ -142,9 +176,9 @@ public class Searcher : Agent
         switch (col.gameObject.tag)
         {
             //벽에 부딪히면 벌점 부여
-            case "Wall":
-                AddReward(-1.0f);
-                break;
+            //case "Wall":
+            //    AddReward(-0.3f);
+            //    break;
             //출구에 부딪히면 상점 부여 
             case "Exit":
                 AddReward(10.0f);
@@ -155,10 +189,39 @@ public class Searcher : Agent
                 AddReward(-10.0f);
                 EndEpisode();
                 break;
-            //문에 부딪히면 상점 부여
-            case "Door":
-                AddReward(1.0f);
+            ////    문에 부딪히면 상점 부여
+            //case "Door":
+            //    CheckDoor(col);
+            //    break;
+
+            // 부딪힌 오브젝트의 태그가 없다면
+            default:
                 break;
         }
+    }
+
+    private void CheckDoor(Collider coll)
+    {
+       // print("문ㅇ체크");
+        //지나간 문이 doors 리스트에 있다면 상점을 부여하고 리스트에서 삭제한다.
+        for (int i = 0; i < doors.Count; i++)
+        {
+            if (coll.gameObject == doors[i])
+            {
+                AddReward(1.0f);
+               // print(doors[i].transform.name);
+                doors.RemoveAt(i);
+                break;
+            }
+        }
+    }
+
+    private void OnCollisionStay(Collision coll)
+    {
+
+    }
+    private void OnCollisionExit(Collision coll)
+    {
+
     }
 }
