@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Exit
   - Fire
+  - Door
   layers:
   - Default
   - TransparentFX

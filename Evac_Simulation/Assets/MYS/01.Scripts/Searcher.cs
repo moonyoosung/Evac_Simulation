@@ -17,9 +17,14 @@ public class Searcher : Agent
     // 이동 : 간다, 안간다
     // 오브젝트
     public GameObject[] objects;
+    public GameObject[] exits;
+    //전 프레임 위치 좌표
+    Vector3 previousPos;
+    //가까운 출구
+    Vector3 target;
     void Start()
     {
-
+        previousPos = transform.position;
     }
     public override void Initialize()
     {
@@ -41,6 +46,21 @@ public class Searcher : Agent
             //시간에 따른 벌점 부여
             AddReward(-1.0f / (float)MaxStep);
         }
+
+
+        //현재 거리와 출구 1의 거리
+        float nowDis = Vector3.Distance(transform.position, target);
+        //예전 거리와 출구 1의 거리
+        float preDis = Vector3.Distance(previousPos, target);
+
+        if (preDis < nowDis)
+        {
+            AddReward(-0.1f);
+        }
+
+
+        //전프레임 위치 저장
+        previousPos = transform.position;
     }
     public override void Heuristic(float[] actionsOut)
     {
@@ -106,6 +126,16 @@ public class Searcher : Agent
                 objects[i].transform.localPosition = myPos;
             }
         }
+        //가까운 출구를 검색한다.
+
+        if (Vector3.Distance(transform.position, exits[0].transform.position) > Vector3.Distance(transform.position, exits[1].transform.position))
+        {
+            target = exits[1].transform.position;
+        }
+        else
+        {
+            target = exits[0].transform.position;
+        }
     }
     private void OnCollisionEnter(Collision col)
     {
@@ -124,6 +154,10 @@ public class Searcher : Agent
             case "Fire":
                 AddReward(-10.0f);
                 EndEpisode();
+                break;
+            //문에 부딪히면 상점 부여
+            case "Door":
+                AddReward(1.0f);
                 break;
         }
     }
