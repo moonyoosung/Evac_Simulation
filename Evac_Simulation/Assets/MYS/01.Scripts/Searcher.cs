@@ -68,8 +68,8 @@ public class Searcher : Agent
         }
 
 
-        //전프레임 위치 저장
-        previousPos = transform.position;
+        ////전프레임 위치 저장
+        //previousPos = transform.position;
     }
     public override void Heuristic(float[] actionsOut)
     {
@@ -118,6 +118,11 @@ public class Searcher : Agent
         for (int j = 0; j < objects.Length; j++)
         {
             objects[j].transform.localPosition = Vector3.zero;
+            // 크기를 초기화한다
+            if (objects[j].GetComponent<Fire>())
+            {
+                objects[j].GetComponent<Fire>().ResetFireSize();
+            }
         }
         // 플레이어와 불은 랜덤한 위치에 배치한다.
         for (int i = 0; i < objects.Length; i++)
@@ -140,6 +145,7 @@ public class Searcher : Agent
                 objects[i].transform.localPosition = myPos;
             }
         }
+
         //가까운 출구를 검색한다.
         //print("0번과 거리 : "+Vector3.Distance(transform.position, exits[0].transform.position));
         //print("1번과 거리 : " + Vector3.Distance(transform.position, exits[1].transform.position));
@@ -208,7 +214,7 @@ public class Searcher : Agent
         {
             if (coll.gameObject == doors[i])
             {
-                AddReward(1.0f);
+                AddReward(2.0f);
                // print(doors[i].transform.name);
                 doors.RemoveAt(i);
                 break;
