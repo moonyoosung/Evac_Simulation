@@ -6,9 +6,13 @@ using Unity.MLAgents.Sensors;
 using System;
 using Random = UnityEngine.Random;
 using Unity.Barracuda;
+using UnityEngine.AI;
 
 public class Searcher : Agent
 {
+    
+    //네비게이션
+    NavMeshAgent nav;
     // 회전속도, 각도
     public float rotSpeed = 5.0f;
     float rotY;
@@ -23,10 +27,11 @@ public class Searcher : Agent
     //전 프레임 위치 좌표
     Vector3 previousPos;
     //가까운 출구
-    Vector3 target;
+    Vector3 target; 
     void Start()
     {
         previousPos = transform.position;
+        nav = GetComponent<NavMeshAgent>();
     }
     public override void Initialize()
     {
@@ -35,41 +40,43 @@ public class Searcher : Agent
 
     public override void OnActionReceived(float[] vectorAction)
     {
-        // 만일 vectorAction의 0번 값이 0이면 왼쪽으로 회전하고, 1이면 회전하지 않고, 2면 오른쪽으로 회전하게 하고 싶다.
-        float rotvalue = vectorAction[0] - 1;
-        //print(rotvalue);
-        //transform.Rotate(transform.up, rotvalue * rotSpeed);
-        rotY += rotvalue * rotSpeed;
+        //// 만일 vectorAction의 0번 값이 0이면 왼쪽으로 회전하고, 1이면 회전하지 않고, 2면 오른쪽으로 회전하게 하고 싶다.
+        //float rotvalue = vectorAction[0] - 1;
+        ////print(rotvalue);
+        ////transform.Rotate(transform.up, rotvalue * rotSpeed);
+        //rotY += rotvalue * rotSpeed;
 
-        transform.localEulerAngles = new Vector3(0, rotY, 0);
-        // 만일 vectorAction의 1번 값이 0이면 가만히 있고, 1이면 앞으로 움직인다.
-        Vector3 dir = transform.forward * vectorAction[1];
-        transform.position += dir * moveSpeed * Time.deltaTime;
+        //transform.localEulerAngles = new Vector3(0, rotY, 0);
+        //// 만일 vectorAction의 1번 값이 0이면 가만히 있고, 1이면 앞으로 움직인다.
+        //Vector3 dir = transform.forward * vectorAction[1];
+        //transform.position += dir * moveSpeed * Time.deltaTime;
+        
 
+        //시간에 경과에 따른 벌점 부여
+        AddReward(-10.0f / (float)MaxStep);
+        ////현재 거리와 출구 1의 거리
+        //float nowDis = Vector3.Distance(transform.position, target);
+        ////예전 거리와 출구 1의 거리
+        //float preDis = Vector3.Distance(previousPos, target);
 
+        //if (preDis <= nowDis)
+        //{
+        //    //MaxStep이 0 보다 크다면 1 / maxStep만큼 점수를 감점
+        //    if (MaxStep > 0)
+        //    {
 
-        //현재 거리와 출구 1의 거리
-        float nowDis = Vector3.Distance(transform.position, target);
-        //예전 거리와 출구 1의 거리
-        float preDis = Vector3.Distance(previousPos, target);
-
-        if (preDis <= nowDis)
-        {
-            //MaxStep이 0 보다 크다면 1 / maxStep만큼 점수를 감점
-            if (MaxStep > 0)
-            {
-                //시간에 경과에 따른 벌점 부여
-                AddReward(-10.0f / (float)MaxStep);
-            }
-        }
-        else
-        {
-            //AddReward(0.1f);
-        }
+        //    }
+        //}
+        //else
+        //{
+        //    //AddReward(0.1f);
+        //}
 
 
         ////전프레임 위치 저장
         //previousPos = transform.position;
+        nav.destination = target;
+        
     }
     public override void Heuristic(float[] actionsOut)
     {
@@ -94,7 +101,7 @@ public class Searcher : Agent
     {
 
     }
-    public override void OnEpisodeBegin()
+    public override void OnEpisodeBegin()   
     {
         ReSetPosition();
     }
@@ -145,7 +152,6 @@ public class Searcher : Agent
                 objects[i].transform.localPosition = myPos;
             }
         }
-
         //가까운 출구를 검색한다.
         //print("0번과 거리 : "+Vector3.Distance(transform.position, exits[0].transform.position));
         //print("1번과 거리 : " + Vector3.Distance(transform.position, exits[1].transform.position));
@@ -190,9 +196,10 @@ public class Searcher : Agent
                 AddReward(10.0f);
                 EndEpisode();
                 break;
-            //불에 부딪히면 벌점 부여
+            //불에 부딪히면 벌점 부여 상점에 2배 수치 부여
             case "Fire":
-                AddReward(-10.0f);
+                AddReward(-20f);
+                
                 EndEpisode();
                 break;
             ////    문에 부딪히면 상점 부여
