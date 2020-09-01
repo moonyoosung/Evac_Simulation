@@ -1,0 +1,41 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1598511046",
+        "python_version": "3.6.10 |Anaconda, Inc.| (default, May  7 2020, 19:46:08) [MSC v.1916 64 bit (AMD64)]",
+        "command_line_arguments": "D:\\anaconda3\\envs\\ml-agent\\Scripts\\mlagents-learn",
+        "mlagents_version": "0.17.0",
+        "mlagents_envs_version": "0.17.0",
+        "communication_protocol_version": "1.0.0",
+        "tensorflow_version": "2.3.0",
+        "end_time_seconds": "1598511108"
+    },
+    "total": 62.4983917,
+    "count": 1,
+    "self": 0.2815421000000029,
+    "children": {
+        "run_training.setup": {
+            "total": 0.0847416,
+            "count": 1,
+            "self": 0.0847416
+        },
+        "TrainerController.start_learning": {
+            "total": 62.132107999999995,
+            "count": 1,
+            "self": 0.008865099999994186,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 62.1229522,
+                    "count": 1,
+                    "self": 62.1229522
+                },
+                "TrainerController._save_model": {
+                    "total": 0.00029070000000075424,
+                    "count": 1,
+                    "self": 0.00029070000000075424
+                }
+            }
+        }
+    }
+}
