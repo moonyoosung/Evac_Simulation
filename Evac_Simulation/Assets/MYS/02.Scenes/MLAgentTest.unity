@@ -133,6 +133,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SearcherNavGame (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 4891770113582671430, guid: 60519ff0e76c0e54aa2f73614ee97f88,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6340639941595791587, guid: 60519ff0e76c0e54aa2f73614ee97f88,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -201,6 +206,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SearcherNavGame (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891770113582671430, guid: 60519ff0e76c0e54aa2f73614ee97f88,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6340639941595791587, guid: 60519ff0e76c0e54aa2f73614ee97f88,
         type: 3}
@@ -271,6 +281,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SearcherNavGame (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 4891770113582671430, guid: 60519ff0e76c0e54aa2f73614ee97f88,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6340639941595791587, guid: 60519ff0e76c0e54aa2f73614ee97f88,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -339,6 +354,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SearcherNavGame (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891770113582671430, guid: 60519ff0e76c0e54aa2f73614ee97f88,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6340639941595791587, guid: 60519ff0e76c0e54aa2f73614ee97f88,
         type: 3}
@@ -409,6 +429,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SearcherNavGame (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4891770113582671430, guid: 60519ff0e76c0e54aa2f73614ee97f88,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6340639941595791587, guid: 60519ff0e76c0e54aa2f73614ee97f88,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -466,6 +491,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60519ff0e76c0e54aa2f73614ee97f88, type: 3}
+--- !u!114 &974038296 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8700676216534636754, guid: 60519ff0e76c0e54aa2f73614ee97f88,
+    type: 3}
+  m_PrefabInstance: {fileID: 2009025797}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb6b867a41448888c1cd4f99643ad71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1093108455
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -477,6 +514,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SearcherNavGame (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891770113582671430, guid: 60519ff0e76c0e54aa2f73614ee97f88,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6340639941595791587, guid: 60519ff0e76c0e54aa2f73614ee97f88,
         type: 3}
@@ -547,6 +589,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SearcherNavGame (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 4891770113582671430, guid: 60519ff0e76c0e54aa2f73614ee97f88,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6340639941595791587, guid: 60519ff0e76c0e54aa2f73614ee97f88,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -616,6 +663,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SearcherNavGame (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 4891770113582671430, guid: 60519ff0e76c0e54aa2f73614ee97f88,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6340639941595791587, guid: 60519ff0e76c0e54aa2f73614ee97f88,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -684,6 +736,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SearcherNavGame (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891770113582671430, guid: 60519ff0e76c0e54aa2f73614ee97f88,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6340639941595791587, guid: 60519ff0e76c0e54aa2f73614ee97f88,
         type: 3}
@@ -846,6 +903,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SearcherNavGame (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 4891770113582671430, guid: 60519ff0e76c0e54aa2f73614ee97f88,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6340639941595791587, guid: 60519ff0e76c0e54aa2f73614ee97f88,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -914,6 +976,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SearcherNavGame (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891770113582671430, guid: 60519ff0e76c0e54aa2f73614ee97f88,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6340639941595791587, guid: 60519ff0e76c0e54aa2f73614ee97f88,
         type: 3}
@@ -1039,6 +1106,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8700676216534636756, guid: 60519ff0e76c0e54aa2f73614ee97f88,
+        type: 3}
+      propertyPath: raySensor
+      value: 
+      objectReference: {fileID: 974038296}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60519ff0e76c0e54aa2f73614ee97f88, type: 3}
 --- !u!1001 &2068182663
@@ -1052,6 +1124,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SearcherNavGame (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891770113582671430, guid: 60519ff0e76c0e54aa2f73614ee97f88,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6340639941595791587, guid: 60519ff0e76c0e54aa2f73614ee97f88,
         type: 3}
@@ -1122,6 +1199,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SearcherNavGame (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4891770113582671430, guid: 60519ff0e76c0e54aa2f73614ee97f88,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6340639941595791587, guid: 60519ff0e76c0e54aa2f73614ee97f88,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1191,6 +1273,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SearcherNavGame (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4891770113582671430, guid: 60519ff0e76c0e54aa2f73614ee97f88,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6340639941595791587, guid: 60519ff0e76c0e54aa2f73614ee97f88,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1259,6 +1346,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SearcherNavGame (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891770113582671430, guid: 60519ff0e76c0e54aa2f73614ee97f88,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6340639941595791587, guid: 60519ff0e76c0e54aa2f73614ee97f88,
         type: 3}

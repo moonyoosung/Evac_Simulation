@@ -10,7 +10,10 @@ using UnityEngine.AI;
 
 public class Searcher : Agent
 {
-    
+    //레이퍼셉션
+    public RayPerceptionSensorComponent3D raySensor;
+    RayPerceptionInput r2;
+    RayPerceptionOutput r3;
     //네비게이션
     NavMeshAgent nav;
     // 회전속도, 각도
@@ -27,11 +30,12 @@ public class Searcher : Agent
     //전 프레임 위치 좌표
     Vector3 previousPos;
     //가까운 출구
-    Vector3 target; 
+    Vector3 target;
     void Start()
     {
         previousPos = transform.position;
         nav = GetComponent<NavMeshAgent>();
+        r2 = raySensor.GetRayPerceptionInput();
     }
     public override void Initialize()
     {
@@ -50,7 +54,7 @@ public class Searcher : Agent
         //// 만일 vectorAction의 1번 값이 0이면 가만히 있고, 1이면 앞으로 움직인다.
         //Vector3 dir = transform.forward * vectorAction[1];
         //transform.position += dir * moveSpeed * Time.deltaTime;
-        
+
 
         //시간에 경과에 따른 벌점 부여
         AddReward(-10.0f / (float)MaxStep);
@@ -76,7 +80,7 @@ public class Searcher : Agent
         ////전프레임 위치 저장
         //previousPos = transform.position;
         nav.destination = target;
-        
+
     }
     public override void Heuristic(float[] actionsOut)
     {
@@ -97,11 +101,11 @@ public class Searcher : Agent
             actionsOut[1] = 1.0f;
         }
     }
+
     public override void CollectObservations(VectorSensor sensor)
     {
-
     }
-    public override void OnEpisodeBegin()   
+    public override void OnEpisodeBegin()
     {
         ReSetPosition();
     }
@@ -112,6 +116,16 @@ public class Searcher : Agent
         if (Input.GetKeyDown(KeyCode.R))
         {
             ReSetPosition();
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+
+            // 레이퍼셉션의 각 태그번호를 가져오는 코드
+            r3 = RayPerceptionSensor.Perceive(r2);
+            foreach (RayPerceptionOutput.RayOutput ro in r3.RayOutputs)
+            {
+                print(ro.HitFraction);
+            }
         }
         //Ray ray = new Ray(transform.position, transform.forward);
         //RaycastHit hit = new RaycastHit();
@@ -172,7 +186,7 @@ public class Searcher : Agent
     private void OnTriggerExit(Collider col)
     {
         switch (col.gameObject.tag)
-        {           
+        {
             //문에 부딪히면 상점 부여
             case "Door":
                 CheckDoor(col);
@@ -199,7 +213,7 @@ public class Searcher : Agent
             //불에 부딪히면 벌점 부여 상점에 2배 수치 부여
             case "Fire":
                 AddReward(-20f);
-                
+
                 EndEpisode();
                 break;
             ////    문에 부딪히면 상점 부여
@@ -215,14 +229,14 @@ public class Searcher : Agent
 
     private void CheckDoor(Collider coll)
     {
-       // print("문ㅇ체크");
+        // print("문ㅇ체크");
         //지나간 문이 doors 리스트에 있다면 상점을 부여하고 리스트에서 삭제한다.
         for (int i = 0; i < doors.Count; i++)
         {
             if (coll.gameObject == doors[i])
             {
                 AddReward(2.0f);
-               // print(doors[i].transform.name);
+                // print(doors[i].transform.name);
                 doors.RemoveAt(i);
                 break;
             }
