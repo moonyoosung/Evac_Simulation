@@ -10,6 +10,8 @@ using UnityEngine.AI;
 
 public class Searcher : Agent
 {
+    //에피소드관리자
+    GameManager gm;
     //레이퍼셉션
     public RayPerceptionSensorComponent3D raySensor;
     RayPerceptionInput r2;
@@ -24,15 +26,32 @@ public class Searcher : Agent
     // 회전 : 왼쪽, 오른쪽, 가만히
     // 이동 : 간다, 안간다
     // 오브젝트
-    public GameObject[] objects;
+    GameObject[] objects;
+    public GameObject[] players;
     public GameObject[] exits;
-    public List<GameObject> doors;
+    //public List<GameObject> doors;
     //전 프레임 위치 좌표
     Vector3 previousPos;
     //가까운 출구
     Vector3 target;
+    //불을 봤을 때 행동하는 bool값
+    bool changeDir;
+
+
     void Start()
     {
+        gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        players = GameObject.FindGameObjectsWithTag("Player");
+        objects = new GameObject[players.Length + 1];
+
+        // 불은 0번에 넣는다.
+        objects[0] = GameObject.FindGameObjectWithTag("Fire");
+        // 플레이어는 1번부터 obejcts에 넣고
+        for (int i = 0; i < players.Length; i++)
+        {
+            objects[1 + i] = players[i];
+        }
+
         previousPos = transform.position;
         nav = GetComponent<NavMeshAgent>();
         r2 = raySensor.GetRayPerceptionInput();
@@ -44,6 +63,7 @@ public class Searcher : Agent
 
     public override void OnActionReceived(float[] vectorAction)
     {
+        #region"주석 : 행동 지정 코드 "
         //// 만일 vectorAction의 0번 값이 0이면 왼쪽으로 회전하고, 1이면 회전하지 않고, 2면 오른쪽으로 회전하게 하고 싶다.
         //float rotvalue = vectorAction[0] - 1;
         ////print(rotvalue);
@@ -57,7 +77,6 @@ public class Searcher : Agent
 
 
         //시간에 경과에 따른 벌점 부여
-        AddReward(-10.0f / (float)MaxStep);
         ////현재 거리와 출구 1의 거리
         //float nowDis = Vector3.Distance(transform.position, target);
         ////예전 거리와 출구 1의 거리
@@ -79,8 +98,37 @@ public class Searcher : Agent
 
         ////전프레임 위치 저장
         //previousPos = transform.position;
-        nav.destination = target;
+        #endregion
 
+        AddReward(-10.0f / (float)MaxStep);
+        // 레이퍼셉션의 각 태그번호를 가져오는 코드
+        r3 = RayPerceptionSensor.Perceive(r2);
+        foreach (RayPerceptionOutput.RayOutput ro in r3.RayOutputs)
+        {
+            // 만약 불을 감지했다면 반대쪽 출구로 가라
+            if (ro.HitTagIndex == 2 && changeDir == false)
+            {
+                if (target == exits[1].transform.position)
+                {
+                    target = exits[0].transform.position;
+                }
+                else if (target == exits[0].transform.position)
+                {
+                    target = exits[1].transform.position;
+                }
+                changeDir = true;
+                break;
+            }
+        }
+        nav.destination = target;
+        // 만약 개체수가 플레이어와 같다면
+
+        if (gm.EscapeCount + gm.DeadCount == players.Length)
+        {
+            print(gm.EscapeCount + gm.DeadCount);
+
+            EndEpisode();
+        }
     }
     public override void Heuristic(float[] actionsOut)
     {
@@ -124,7 +172,7 @@ public class Searcher : Agent
             r3 = RayPerceptionSensor.Perceive(r2);
             foreach (RayPerceptionOutput.RayOutput ro in r3.RayOutputs)
             {
-                print(ro.HitFraction);
+                print(ro.HitTagIndex);
             }
         }
         //Ray ray = new Ray(transform.position, transform.forward);
@@ -136,8 +184,16 @@ public class Searcher : Agent
     }
     public void ReSetPosition()
     {
+        print("리셋됨 : " +gm.isReSetting);
+        if (gm.isReSetting)
+        {
+            return;
+        }
+        gm.isReSetting = true;
+
         for (int j = 0; j < objects.Length; j++)
         {
+            objects[j].SetActive(true);
             objects[j].transform.localPosition = Vector3.zero;
             // 크기를 초기화한다
             if (objects[j].GetComponent<Fire>())
@@ -180,68 +236,45 @@ public class Searcher : Agent
             //print("0번 출구");
         }
 
+        // 제어변수 초기화
+        changeDir = false;
+        gm.isReSetting = false;
+        // 개체수 초기화
+        gm.DeadCount = 0;
+        gm.EscapeCount = 0;
     }
 
     // 문을 통과해서 나간다면
     private void OnTriggerExit(Collider col)
     {
-        switch (col.gameObject.tag)
-        {
-            //문에 부딪히면 상점 부여
-            case "Door":
-                CheckDoor(col);
-                break;
 
-            // 부딪힌 오브젝트의 태그가 없다면
-            default:
-                break;
-        }
     }
     private void OnCollisionEnter(Collision col)
     {
         switch (col.gameObject.tag)
         {
-            //벽에 부딪히면 벌점 부여
-            //case "Wall":
-            //    AddReward(-0.3f);
-            //    break;
             //출구에 부딪히면 상점 부여 
             case "Exit":
                 AddReward(10.0f);
-                EndEpisode();
+                gm.EscapeCount++;
+                transform.gameObject.SetActive(false);
                 break;
+
             //불에 부딪히면 벌점 부여 상점에 2배 수치 부여
             case "Fire":
                 AddReward(-20f);
-
-                EndEpisode();
+                gm.DeadCount++;
+                transform.gameObject.SetActive(false);
                 break;
-            ////    문에 부딪히면 상점 부여
-            //case "Door":
-            //    CheckDoor(col);
-            //    break;
 
             // 부딪힌 오브젝트의 태그가 없다면
             default:
                 break;
+
         }
+
     }
 
-    private void CheckDoor(Collider coll)
-    {
-        // print("문ㅇ체크");
-        //지나간 문이 doors 리스트에 있다면 상점을 부여하고 리스트에서 삭제한다.
-        for (int i = 0; i < doors.Count; i++)
-        {
-            if (coll.gameObject == doors[i])
-            {
-                AddReward(2.0f);
-                // print(doors[i].transform.name);
-                doors.RemoveAt(i);
-                break;
-            }
-        }
-    }
 
     private void OnCollisionStay(Collision coll)
     {
