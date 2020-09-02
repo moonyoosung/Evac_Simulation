@@ -9,6 +9,7 @@ TagManager:
   - Exit
   - Fire
   - Door
+  - GameManager
   layers:
   - Default
   - TransparentFX
