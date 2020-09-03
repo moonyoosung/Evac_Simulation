@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD:Evac_Simulation/Assets/HGS/Materials.meta
+guid: 367db56b4eb07b044814e9cb9fa12a97
+=======
+guid: 5d6f5e6c3f1725d42b2d3ebad970c6fd
+>>>>>>> MYS:Evac_Simulation/Assets/Asset.meta
+=======
 guid: 9818bb032ad58694db86253fa9aac43b
+>>>>>>> MYS
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
