@@ -322,6 +322,17 @@ public class Searcher : Agent
     {
 
     }
+    private void OnTriggerStay(Collider col)
+    {
+        // 방안에 계속 있는 상태라면 벌점
+        switch (col.gameObject.tag)
+        {
+            case "Room":
+                AddReward(-10.0f / (float)MaxStep);
+                break;
+        }
+    }
+
     private void OnCollisionEnter(Collision col)
     {
         switch (col.gameObject.tag)
