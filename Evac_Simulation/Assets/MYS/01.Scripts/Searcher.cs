@@ -17,7 +17,7 @@ public class Searcher : Agent
     RayPerceptionInput r2;
     RayPerceptionOutput r3;
     //네비게이션
-    NavMeshAgent nav;
+    //NavMeshAgent nav;
     // 회전속도, 각도
     public float rotSpeed = 5.0f;
     float rotY;
@@ -55,7 +55,7 @@ public class Searcher : Agent
         //}
 
         previousPos = transform.position;
-        nav = GetComponent<NavMeshAgent>();
+        //nav = GetComponent<NavMeshAgent>();
         r2 = raySensor.GetRayPerceptionInput();
     }
     public override void Initialize()
@@ -135,44 +135,44 @@ public class Searcher : Agent
 
     }
 
-    private void OnDetectFireDecision()
-    {
-        // 레이퍼셉션의 각 태그번호를 가져오는 코드
-        r3 = RayPerceptionSensor.Perceive(r2);
-        foreach (RayPerceptionOutput.RayOutput ro in r3.RayOutputs)
-        {
-            changeDir = true;
-            // 만약 불을 감지했다면 반대쪽 출구로 가라
-            if (ro.HitTagIndex == 2)
-            {
-                /* 
-                 * 1. 네비게이션 이동을 끄고
-                 * 2. 자신의 행동에 따라 이동하며
-                 * 3. 만약 불이 감지가 안됐다면
-                 * 4. 자신의 현재 위치에서 가까운 출구를 검색하여 다시 네비게이션을 작동시켜라
-                 */
-                nav.enabled = false;
-                changeDir = false;
-                decisionExit = true;
-                break;
-            }
-        }
-        if (changeDir)
-        {
-            //nav.enabled = true;
-            if (decisionExit)
-            {
-                DecisionClosetExit();
-                decisionExit = false;
-            }
-            if (nav.enabled)
-            {
-                nav.destination = target;
+    //private void OnDetectFireDecision()
+    //{
+    //    // 레이퍼셉션의 각 태그번호를 가져오는 코드
+    //    r3 = RayPerceptionSensor.Perceive(r2);
+    //    foreach (RayPerceptionOutput.RayOutput ro in r3.RayOutputs)
+    //    {
+    //        changeDir = true;
+    //        // 만약 불을 감지했다면 반대쪽 출구로 가라
+    //        if (ro.HitTagIndex == 2)
+    //        {
+    //            /* 
+    //             * 1. 네비게이션 이동을 끄고
+    //             * 2. 자신의 행동에 따라 이동하며
+    //             * 3. 만약 불이 감지가 안됐다면
+    //             * 4. 자신의 현재 위치에서 가까운 출구를 검색하여 다시 네비게이션을 작동시켜라
+    //             */
+    //            nav.enabled = false;
+    //            changeDir = false;
+    //            decisionExit = true;
+    //            break;
+    //        }
+    //    }
+    //    if (changeDir)
+    //    {
+    //        //nav.enabled = true;
+    //        if (decisionExit)
+    //        {
+    //            DecisionClosetExit();
+    //            decisionExit = false;
+    //        }
+    //        if (nav.enabled)
+    //        {
+    //            nav.destination = target;
 
-            }
-        }
+    //        }
+    //    }
 
-    }
+    //}
 
     public override void Heuristic(float[] actionsOut)
     {
@@ -299,8 +299,8 @@ public class Searcher : Agent
         // 개체수 초기화
         gm.DeadCount = 0;
         gm.EscapeCount = 0;
-        //네비게이션 켜주기
-        nav.enabled = true;
+        ////네비게이션 켜주기
+        //nav.enabled = true;
     }
 
     private void DecisionClosetExit()
