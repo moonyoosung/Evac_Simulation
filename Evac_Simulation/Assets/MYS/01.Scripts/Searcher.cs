@@ -275,7 +275,9 @@ public class Searcher : Agent
             // 단 아이템과 장애물들은 서로 겹치지 않아야 한다.
             // 레이어 마스크
             int ground = 1 << LayerMask.NameToLayer("Ground");
-            Collider[] cols = Physics.OverlapBox(myPos, transform.localScale * 2, Quaternion.identity, ~ground);
+            int room = 1 << LayerMask.NameToLayer("RoomBox");
+            int checkLayer = ground | room;
+            Collider[] cols = Physics.OverlapBox(myPos, transform.localScale * 2, Quaternion.identity, ~checkLayer);
             if (cols.Length > 0)
             {
                 i--;
