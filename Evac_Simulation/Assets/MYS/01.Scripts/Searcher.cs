@@ -35,7 +35,6 @@ public class Searcher : Agent
     //가까운 출구
     Vector3 target;
     //불을 봤을 때 행동하는 bool값
-    bool changeDir;
     bool decisionExit;
     bool detectEixt;
 
@@ -295,7 +294,6 @@ public class Searcher : Agent
 
 
         // 제어변수 초기화
-        changeDir = false;
         gm.isReSetting = false;
         detectEixt = false;
         // 개체수 초기화
@@ -342,21 +340,18 @@ public class Searcher : Agent
             //출구에 부딪히면 상점 부여 
             case "Exit":
                 AddReward(10.0f);
+                EndEpisode();
                 //gm.EscapeCount++;
                 //transform.gameObject.SetActive(false);
-
-
-                EndEpisode();
                 break;
 
             //불에 부딪히면 벌점 부여 상점에 2배 수치 부여
             case "Fire":
                 AddReward(-20f);
+                EndEpisode();
                 //gm.DeadCount++;
                 //transform.gameObject.SetActive(false);
 
-
-                EndEpisode();
                 break;
 
             // 부딪힌 오브젝트의 태그가 없다면
@@ -364,19 +359,7 @@ public class Searcher : Agent
                 break;
 
         }
-        // 만약 개체수가 플레이어와 같다면
 
-        //if (gm.EscapeCount + gm.DeadCount == players.Length)
-        //{
-        //    // 만약 리셋중이 아니라면 에피소드를 다시 실행시킨다.
-        //    if (gm.isReSetting == false)
-        //    {
-        //        print(gm.EscapeCount + gm.DeadCount);
-
-        //        EndEpisode();
-
-        //    }
-        //}
     }
 
 

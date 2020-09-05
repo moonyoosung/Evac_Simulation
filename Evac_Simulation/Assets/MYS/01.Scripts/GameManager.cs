@@ -20,6 +20,14 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        // 만약 개체수가 플레이어와 같다면
 
+        //if (EscapeCount + DeadCount == players.Length)
+        //{
+        //    // 만약 리셋중이 아니라면 에피소드를 다시 실행시킨다.
+
+        //    EndEpisode();
+
+        //}
     }
 }
