@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         // 만약 개체수가 플레이어와 같다면
         if (EscapeCount + DeadCount == players.Count)
         {
-            print("리셋");
+            //print("리셋");
             // 만약 리셋중이 아니라면 에피소드를 다시 실행시킨다.
             for (int i = 0; i < players.Count; i++)
             {

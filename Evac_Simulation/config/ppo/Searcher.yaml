@@ -2,7 +2,7 @@ behaviors:
   Evac:
     trainer_type: ppo
     hyperparameters:
-      batch_size: 256
+      batch_size: 128
       buffer_size: 2048
       learning_rate: 0.0003
       beta: 0.005
@@ -20,7 +20,7 @@ behaviors:
         gamma: 0.99
         strength: 1.0
     keep_checkpoints: 5
-    max_steps: 10000000
+    max_steps: 5000000
     time_horizon: 64
-    summary_freq: 1000000
+    summary_freq: 100000
     threaded: true
