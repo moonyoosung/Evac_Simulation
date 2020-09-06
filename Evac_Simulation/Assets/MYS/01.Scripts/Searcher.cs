@@ -205,10 +205,10 @@ public class Searcher : Agent
         sensor.AddObservation(transform.position);
         sensor.AddObservation(exits[0].transform.position);
         sensor.AddObservation(exits[1].transform.position);
-        sensor.AddObservation(transform.position);
+        sensor.AddObservation(fire.transform.position);
         float exits0Dis = Vector3.Distance(transform.position, exits[0].transform.position);
         float exits1Dis = Vector3.Distance(transform.position, exits[1].transform.position);
-        float fireDis = Vector3.Distance(transform.position, transform.position);
+        float fireDis = Vector3.Distance(transform.position, fire.transform.position);
         sensor.AddObservation(exits0Dis);
         sensor.AddObservation(exits1Dis);
         sensor.AddObservation(fireDis);
