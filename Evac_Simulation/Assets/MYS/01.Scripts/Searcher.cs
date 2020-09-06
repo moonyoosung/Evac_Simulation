@@ -272,8 +272,7 @@ public class Searcher : Agent
 
         // 제어변수 초기화
         detectEixt = false;
-        ////네비게이션 켜주기
-        //nav.enabled = true;
+
     }
 
     private void DecisionClosetExit()
