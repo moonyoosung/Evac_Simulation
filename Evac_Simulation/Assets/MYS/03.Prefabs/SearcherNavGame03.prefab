@@ -311,7 +311,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 731455176555588699}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: -7.2, y: 1, z: -2.7}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 2695367126477403233}
@@ -399,10 +399,6 @@ MonoBehaviour:
   raySensor: {fileID: 731455176555588688}
   rotSpeed: 5
   moveSpeed: 5
-  objects:
-  - {fileID: 731455176555588699}
-  - {fileID: 731455178282200030}
-  players: []
   exits:
   - {fileID: 731455177417427459}
   - {fileID: 731455176920497955}
@@ -424,7 +420,7 @@ MonoBehaviour:
     VectorActionSize: 0300000002000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
-  m_Model: {fileID: 5022602860645237092, guid: 8794493f25e5d5a4ab7da500c7d67313, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Evac
@@ -1571,6 +1567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sizeSpeed: 0.05
   fireSize: 3
+  firePosState: 0
 --- !u!1 &1187401091479394407
 GameObject:
   m_ObjectHideFlags: 0
@@ -6695,10 +6692,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df25e018628ab641a4abfe3f5bc29f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 731455176555588694}
+  fire: {fileID: 0}
+  players: []
   isReSetting: 0
   EscapeCount: 0
   DeadCount: 0
+  CustomMaxStep: 2000
+  m_Time: 0
+  s_Time: 0
+  timerState: 0
 --- !u!1 &7580149983991405868
 GameObject:
   m_ObjectHideFlags: 0

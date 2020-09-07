@@ -272,7 +272,7 @@ public class Searcher : Agent
 
         // 제어변수 초기화
         detectEixt = false;
-
+        gm.timerState = true;
     }
 
     private void DecisionClosetExit()

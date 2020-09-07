@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Screen.SetResolution(1920, 1080, true);
         player = GameObject.FindGameObjectsWithTag("Player");
         for (int i = 0; i < player.Length; i++)
         {
@@ -34,12 +35,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         // 만약 maxstep에 도달한 경우
         for (int i = 0; i < players.Count; i++)
         {
-            timerState = true;
             if (players[i].gameObject.activeSelf)
             {
                 if (players[i].StepCount >= CustomMaxStep)
@@ -47,11 +47,8 @@ public class GameManager : MonoBehaviour
                     //죽은 오브젝트로 변경한다.
                     DeadCount++;
                     players[i].gameObject.SetActive(false);
+                    //timerState = false;
                 }
-            }
-            else
-            {
-                timerState = false;
             }
         }
 

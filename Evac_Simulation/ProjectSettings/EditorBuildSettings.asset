@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/MYS/02.Scenes/MLAgentMultiPlayer.unity
+    guid: f990374e2a3256542a84366c24143eea
   m_configObjects: {}
