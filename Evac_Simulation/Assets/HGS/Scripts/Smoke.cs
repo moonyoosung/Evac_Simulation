@@ -6,7 +6,6 @@ public class Smoke : MonoBehaviour
 {
     //에피소드관리자
     GameManager gm;
-    Searcher ply;
 
     public float downSpeed = 0.01f; // 연기하강 속력
 
@@ -19,9 +18,7 @@ public class Smoke : MonoBehaviour
 
     void Start()
     {
-        // Player의 Searcher 스크립트 호출
-        ply = GameObject.Find("Player").GetComponent<Searcher>();
-
+        gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         ResetSmokePos();
         ResetSmokeSize();
     }
@@ -62,15 +59,15 @@ public class Smoke : MonoBehaviour
         {
             detectStartTime += Time.deltaTime; // 감지시작
 
-            ply.AddReward(-20.0f / gm.CustomMaxStep);
+            col.GetComponent<Searcher>().AddReward(-20.0f / gm.CustomMaxStep);
         }
         
         // 10초이상 감지가 지속되면 벌점
         if (detectStartTime >= detectTime)
         {
-            ply.AddReward(-20.0f);
+            col.GetComponent<Searcher>().AddReward(-20.0f);
             gm.DeadCount++;
-            ply.transform.gameObject.SetActive(false);
+            col.transform.gameObject.SetActive(false);
             detectStartTime = 0; // 초기화
         }
     }
