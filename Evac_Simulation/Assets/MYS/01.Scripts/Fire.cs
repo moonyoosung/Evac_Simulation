@@ -39,6 +39,7 @@ public class Fire : MonoBehaviour
             float xPos = Random.Range(-25, 25);
             float zPos = Random.Range(-25, 25);
             Vector3 myPos = new Vector3(xPos, 1, zPos);
+
             // 단 아이템과 장애물들은 서로 겹치지 않아야 한다.
             // 레이어 마스크
             int ground = 1 << LayerMask.NameToLayer("Ground");
