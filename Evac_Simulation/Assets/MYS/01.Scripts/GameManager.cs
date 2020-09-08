@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         // 만약 maxstep에 도달한 경우
         for (int i = 0; i < players.Count; i++)
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
         if (timerState)
         {
             //초침을 돌려준다.
-            s_Time += Time.deltaTime;
+            s_Time += Time.fixedDeltaTime;
 
             //60초 마다 m을 1씩 올려준다.
             if (s_Time >= 60.0f)

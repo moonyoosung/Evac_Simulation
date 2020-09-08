@@ -51,6 +51,7 @@ public class Searcher : Agent
         if (Input.GetKeyDown(KeyCode.R))
         {
             ReSetPosition();
+
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -254,7 +255,7 @@ public class Searcher : Agent
             int ground = 1 << LayerMask.NameToLayer("Ground");
             int room = 1 << LayerMask.NameToLayer("RoomBox");
             int checkLayer = ground | room;
-            Collider[] cols = Physics.OverlapBox(myPos, transform.localScale * 2, Quaternion.identity, ~checkLayer);
+            Collider[] cols = Physics.OverlapBox(myPos, transform.localScale, Quaternion.identity, ~checkLayer);
             if (cols.Length > 0)
             {
                 i--;
@@ -262,6 +263,7 @@ public class Searcher : Agent
             else
             {
                 transform.localPosition = myPos;
+
             }
         }
 

@@ -47,7 +47,7 @@ public class Smoke : MonoBehaviour
 
     void ResetSmokeSize()
     {
-        transform.localScale = new Vector3(4.2f, 1.0f, 4.8f);
+        transform.localScale = new Vector3(50.0f, 3.0f, 49.6f);
         ySize = transform.localScale.y;
     }
 
