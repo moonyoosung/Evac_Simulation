@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Exit
+  - Wall
+  - Fire
+  - Room
+  - Door
+  - GameManager
+  - Floor8x5
+  - Floor10x8
   layers:
   - Default
   - TransparentFX

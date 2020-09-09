@@ -29,8 +29,8 @@ public class Searcher : Agent
     Fire fire;
     // 위치 좌표를 가져오기 위한 오브젝트
     public GameObject[] exits;
-    public Transform[] floor10x8;
-    public Transform[] floor8x5;
+    public GameObject[] floor10x8;
+    public GameObject[] floor8x5;
     //public List<GameObject> doors;
     //전 프레임 위치 좌표
     Vector3 previousPos;
@@ -43,6 +43,8 @@ public class Searcher : Agent
 
     void Start()
     {
+        floor10x8 = GameObject.FindGameObjectsWithTag("Floor10x8");
+        floor8x5 = GameObject.FindGameObjectsWithTag("Floor8x5");
         gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         fire = GameObject.FindGameObjectWithTag("Fire").GetComponent<Fire>();
         previousPos = transform.position;
@@ -261,14 +263,14 @@ public class Searcher : Agent
             if (perFloor > 49)
             {
                 int floor8x5Idx = Random.Range(0, floor8x5.Length);
-                xPos = Random.Range(floor8x5[floor8x5Idx].position.x - 4.0f, floor8x5[floor8x5Idx].position.x + 4.0f);
-                zPos = Random.Range(floor8x5[floor8x5Idx].position.z - 2.5f, floor8x5[floor8x5Idx].position.z + 2.5f);
+                xPos = Random.Range(floor8x5[floor8x5Idx].transform.position.x - 2.5f, floor8x5[floor8x5Idx].transform.position.x + 2.5f);
+                zPos = Random.Range(floor8x5[floor8x5Idx].transform.position.z - 2.5f, floor8x5[floor8x5Idx].transform.position.z + 2.5f);
             }
             else
             {
                 int floor10x8Idx = Random.Range(0, floor10x8.Length);
-                xPos = Random.Range(floor10x8[floor10x8Idx].position.x - 5.0f, floor10x8[floor10x8Idx].position.x + 5.0f);
-                zPos = Random.Range(floor10x8[floor10x8Idx].position.z - 4.0f, floor10x8[floor10x8Idx].position.z + 4.0f);
+                xPos = Random.Range(floor10x8[floor10x8Idx].transform.position.x - 4.0f, floor10x8[floor10x8Idx].transform.position.x + 4.0f);
+                zPos = Random.Range(floor10x8[floor10x8Idx].transform.position.z - 4.0f, floor10x8[floor10x8Idx].transform.position.z + 4.0f);
             }
 
 
