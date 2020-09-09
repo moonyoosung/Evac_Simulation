@@ -10,6 +10,8 @@ public class Fire : MonoBehaviour
     public bool firePosState = false;
     float xSize;
     float zSize;
+    // 화재 발생 위치 지정
+    public Transform[] firePosFloors;
     void Start()
     {
         ResetFireSize();
