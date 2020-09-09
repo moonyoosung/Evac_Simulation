@@ -4,9 +4,5 @@ Evac_Simulation/obj
 Evac_Simulation/Temp
 Evac_Simulation/*.sln
 Evac_Simulation/Library
-Evac_Simulation/Assets/Library
-Evac_Simulation/Assets/JP_School corridor_V2
 *.csproj
 */.vs
-Evac_Simulation/Assets/JP_School corridor_V2.meta
-Evac_Simulation/Assets/Library.meta
